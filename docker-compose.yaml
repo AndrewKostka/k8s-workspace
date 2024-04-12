@@ -1,0 +1,19 @@
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_UID: 1000
+        USER_GID: 1000
+        DOCKER_GID: 999
+        MINIKUBE_MEMORY: 8192
+        MINIKUBE_CPUS: 4
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - workspace:/home/user
+      - .:/home/user/project
+
+volumes:
+  workspace:
